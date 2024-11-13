@@ -61,7 +61,7 @@ int main() {
 
 	 if(!isAllowed(argv[0])) {
 		 //enters this if statement if a 0 is returned from the isAllowed function
-		 printf("not allowed \n");
+		 printf("NOT ALLOWED! \n");
 		 continue;	    
 	 }
 	
@@ -81,7 +81,7 @@ int main() {
 		}
 	} else if (strcmp(argv[0], "mkdir") == 0) {
 		if(argc < 2) {
-			printf("rsh mkdir: missing operand for mkdir \n");
+			printf("rsh: mkdir: missing operand for mkdir \n");
 		} else {
 			for(int i = 0; i < argc; i++) {
 				if (mkdir(argv[i], 0777) != 0){
@@ -90,7 +90,7 @@ int main() {
 			}
 		    }
 	} else if (strcmp(argv[0], "rmdir") == 0){
-		printf("NOT ALLOWED \n");
+		printf("NOT ALLOWED! \n");
 	} else if (strcmp(argv[0], "touch") == 0){
 		if(argc < 2){
 			printf("rsh: touch: missing operand\n");
