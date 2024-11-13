@@ -80,7 +80,7 @@ int main() {
 		    pid_t pid;
 		    int status;
 		    posix_spawnattr_t attr;
-		    posix_spawnattrinit(&attr);
+		    posix_spawnattr_init(&attr);
 
 		    if(posix_spawnp(&pid, argv[0], NULL, &attr, argv, environ) !=0){
 			    perror("spawn failed :(");
