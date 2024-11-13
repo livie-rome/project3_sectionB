@@ -66,7 +66,7 @@ int main() {
 	    if (strcmp(argv[0], "cd") == 0) {
 		    if(argc > 2) {
 			    printf("rsh: too many arguments for cd");
-		    } else if (argc ==2 && chdir(argv[1] !=0) {
+		    } else if (argc ==2 && chdir(argv[1]) !=0) {
 			    perror("rsh cd failed");
 		    }
 	    } else if (strcmp(argv[0], "exit") == 0) {
@@ -74,7 +74,7 @@ int main() {
 	    } else if (strcmp(argv[0], "help") == 0) {
 		    printf("The allowed commands are: \n");
 		    for(int i = 0; i < N; i++) {
-			    printf("%s\n", allowed[i});
+			    printf("%s\n", allowed[i]);
 		    }
 	    } else {
 		    pid_t pid;
@@ -89,10 +89,8 @@ int main() {
 		    if(waitpid(pid, &status, 0) == -1) {
 			    perror("waitpid failed");
 		    }
-			    
-		
-	
-	
+	    }
+
     }
     return 0;
 }
