@@ -68,20 +68,20 @@ int main() {
 	    
 	if (strcmp(argv[0], "cd") == 0) {
 		if(argc > 2) {
-			printf("rsh cd: too many arguments for cd\n");
+			printf("-rsh: cd: too many arguments\n");
 		} else if (argc ==2 && chdir(argv[1]) !=0) {
 			perror("rsh cd failed");
 		}
 	} else if (strcmp(argv[0], "exit") == 0) {
 		    return 0;
 	} else if (strcmp(argv[0], "help") == 0) {
-		printf("The allowed commands are:\n");
+		printf("The allowed commands are: \n");
 		for(int i = 0; i < N; i++) {
 			printf("%d: %s\n", i+1, allowed[i]);
 		}
 	} else if (strcmp(argv[0], "mkdir") == 0) {
 		if(argc < 2) {
-			printf("rsh mkdir: missing operand\n");
+			printf("rsh mkdir: missing operand for mkdir \n");
 		} else {
 			for(int i = 0; i < argc; i++) {
 				if (mkdir(argv[i], 0777) != 0){
