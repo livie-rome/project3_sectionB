@@ -54,42 +54,81 @@ int main() {
 		token = strtok(NULL, " ");
 
 	}
-	    argv[argc] = NULL;
-	    if (argc == 0) continue; //empty input
+	argv[argc] = NULL;
+	if (argc == 0) continue; //empty input
 
-	    if(!isAllowed(argv[0])) {
-		    //enters this if statement if a 0 is returned from the isAllowed function
-		    printf("not allowed \n");
-		    continue;
-	    }
+	 if(!isAllowed(argv[0])) {
+		 //enters this if statement if a 0 is returned from the isAllowed function
+		 printf("not allowed \n");
+		 continue;	    
+	 }
+	
 	    
-	    if (strcmp(argv[0], "cd") == 0) {
-		    if(argc > 2) {
-			    printf("rsh: too many arguments for cd");
-		    } else if (argc ==2 && chdir(argv[1]) !=0) {
-			    perror("rsh cd failed");
-		    }
-	    } else if (strcmp(argv[0], "exit") == 0) {
+	if (strcmp(argv[0], "cd") == 0) {
+		if(argc > 2) {
+			printf("rsh: too many arguments for cd");
+		} else if (argc ==2 && chdir(argv[1]) !=0) {
+			perror("rsh cd failed");
+		}
+	} else if (strcmp(argv[0], "exit") == 0) {
 		    return 0;
-	    } else if (strcmp(argv[0], "help") == 0) {
-		    printf("The allowed commands are: \n");
-		    for(int i = 0; i < N; i++) {
-			    printf("%s\n", allowed[i]);
+	} else if (strcmp(argv[0], "help") == 0) {
+		printf("The allowed commands are: \n");
+		for(int i = 0; i < N; i++) {
+			printf("%d: %s\n", i+1, allowed[i]);
+		}
+	} else if (strcmp(argv[0], "mkdir") == 0) {
+		if(argc < 2) {
+			printf("rsh: missing operand for mkdir \n");
+		} else {
+			for(int i = 0; i < argc; i++) {
+				if (mkdir(argv[i], 0777) != 0){
+					perror("rsh mkdir has failed");
+				}  
+			}
 		    }
-	    } else {
-		    pid_t pid;
-		    int status;
-		    posix_spawnattr_t attr;
-		    posix_spawnattr_init(&attr);
+	} else if (strcmp(argv[0], "rmdir") == 0){
+		printf("NOT ALLOWED \n");
+	} else if (strcmp(argv[0}, "touch") == 0){
+		if(argc < 2){
+			printf("rsh: missing operand for touch\n");
+		} else {
+			for (int i = 1; i < argc; i++){
+				int fd = open(argv[i], O_CREAT | O_WRONLY, 0644);
+				if (fd == -1){
+					perror("rsh touch failed);
+				} else {
+					close(fd);	
+				}	
+			}	
+		}
+	} else if (strcmp(argv[0], "ls") == 0) {
+		pid_t pid;
+		int status;
+		posix_spawnattr_t attr;
+		posix_spawnattr_init(&attr);
 
-		    if(posix_spawnp(&pid, argv[0], NULL, &attr, argv, environ) !=0){
-			    perror("spawn failed :(");
-		    }
+		if(posix_spawnp(&pid, "ls" , NULL, &attr, argv, environ) !=0){
+			perror("spawn failed :(");
+		}
 
-		    if(waitpid(pid, &status, 0) == -1) {
-			    perror("waitpid failed");
-		    }
-	    }
+		if(waitpid(pid, &status, 0) == -1) {
+			perror("waitpid failed");
+		}
+	} else {
+		pid_t pid;
+		int status;
+		posix_spawnattr_t attr;
+		posix_spawnattr_init(&attr);
+
+		if(posix_spawnp(&pid, argv[0], NULL, &attr, argv, environ) !=0){
+			perror("spawn failed :(");
+		}
+
+		if(waitpid(pid, &status, 0) == -1) {
+			perror("waitpid failed");
+		}
+	}
 
     }
     return 0;
