@@ -83,7 +83,7 @@ int main() {
 		if(argc < 2) {
 			printf("rsh: mkdir: missing operand for mkdir \n");
 		} else {
-			for(int i = 0; i < argc; i++) {
+			for(int i = 1; i < argc; i++) {
 				if (mkdir(argv[i], 0777) != 0){
 					perror("rsh mkdir failed");
 				}  
