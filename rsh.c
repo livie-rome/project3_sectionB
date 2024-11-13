@@ -4,6 +4,8 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/sta.h>
+#include <fcntl.h>
 
 #define N 12
 
