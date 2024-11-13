@@ -96,7 +96,7 @@ int main() {
 			for (int i = 1; i < argc; i++){
 				int fd = open(argv[i], O_CREAT | O_WRONLY, 0644);
 				if (fd == -1){
-					perror("rsh touch failed);
+					perror("rsh touch failed");
 				} else {
 					close(fd);	
 				}	
