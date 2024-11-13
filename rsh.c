@@ -89,7 +89,7 @@ int main() {
 		    }
 	} else if (strcmp(argv[0], "rmdir") == 0){
 		printf("NOT ALLOWED \n");
-	} else if (strcmp(argv[0}, "touch") == 0){
+	} else if (strcmp(argv[0], "touch") == 0){
 		if(argc < 2){
 			printf("rsh: missing operand for touch\n");
 		} else {
